@@ -1,0 +1,73 @@
+
+
+<div id="content-header">
+    <div id="breadcrumb"></div>
+    <h1>添加日志</h1>
+</div>
+<div class="container-fluid">
+    <hr/>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                    <h5>添加日志</h5>
+                </div>
+                <div class="widget-content nopadding">
+
+                    <div style="padding:5px">
+
+                        <input type="file" name="file" id="file"/>
+                        <input type="button" value="上传文件" onclick="save()"/>
+                    </div>
+
+                </div>
+                <input type="button" value="填写表格" onclick="saveB()"/>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+
+    var msg = [[${msg}]];
+    if(msg!=null){
+        alert(msg);
+    }
+
+    function save(){
+        var file = $("input[name=file]").val()
+        if(file.length == 0){
+            alert("请先选择文件");
+            return;
+        }
+        $.ajaxFileUpload
+        (
+                {
+                    url: 'daily/daily_save', //用于文件上传的服务器端请求地址
+
+                    fileElementId: 'file', //文件上传域的ID
+                    dataType: 'text', //返回值类型 一般设置为json
+                    success: function (data, status)  //服务器成功响应处理函数
+                    {
+                        $("input[name=file]").val('')
+                        alert("保存成功!")
+
+                    },
+                    error: function (data, status, e)//服务器响应失败处理函数
+                    {
+
+                        alert(e);
+                    }
+                }
+        )
+    }
+
+    function saveB(){
+        loadPage([[@{daily/daily_add_biaoge}]]);
+    }
+
+
+    /*]]>*/
+</script>
+

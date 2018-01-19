@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>管理系统</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{css/bootstrap-responsive.min.css}"/>
+    <link rel="stylesheet" th:href="@{css/uniform.css}"/>
+    <link rel="stylesheet" th:href="@{css/select2.css}"/>
+    <link rel="stylesheet" th:href="@{css/matrix-style.css}"/>
+    <link rel="stylesheet" th:href="@{css/matrix-media.css}"/>
+    <link rel="stylesheet" th:href="@{css/bootstrap-wysihtml5.css}" />
+    <link rel="stylesheet" th:href="@{css/bootstrapValidator.min.css}" />
+    <link rel="stylesheet" th:href="@{css/datepicker.css}" />
+    <link th:href="@{font-awesome/css/font-awesome.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<!--Header-part-->
+<div id="header">
+
+    <h3 style="display:inline-block;margin-left: 500px">管理系统</h3>
+</div>
+<!--close-Header-part-->
+
+<!--top-Header-menu-->
+<form id="logoutForm" method="post" th:action="@{logout}">
+    <div id="user-nav" class="navbar navbar-inverse">
+        <ul class="nav">
+        <!--<li><h3>自主招生高校报名管理系统</h3></li>-->
+
+        <li class="" style="margin-top: 20px"><a title="" href="javascript:void(0)"  onclick="document.getElementById('logoutForm').submit()"><i class="icon icon-share-alt"></i> <span class="text">退出</span></a>
+        </li>
+            </ul>
+    </div>
+</form>
+<!--start-top-serch-->
+
+<!--close-top-serch-->
+
+<!--sidebar-menu-->
+
+<div id="sidebar">
+    <a href="#" class="visible-phone"><i class="icon icon-list"></i>导航</a>
+    <ul>
+        <li><a ><i class="icon icon-home"></i> <span>组织架构</span></a></li>
+        <li><a th:onclick="'loadPage(\''+@{/daily/daily_list}+'\')'"><i class="icon icon-home"></i> <span>日常服务</span></a></li>
+        <li><a ><i class="icon icon-home"></i> <span>应急管理</span></a></li>
+        <li><a ><i class="icon icon-home"></i> <span>培训管理</span></a></li>
+        <li><a ><i class="icon icon-home"></i> <span>权限管理</span></a></li>
+        <!--<li><a th:onclick="'loadPage(\''+@{/lecturer/list_lecturer}+'\')'"><i class="icon icon-home"></i> <span>用户管理</span></a></li>
+        <li><a th:onclick="'loadPage(\''+@{/video/list_video}+'\')'"><i class="icon icon-home"></i> <span>视频管理</span></a></li>
+
+
+        <li><a th:onclick="'loadPage(\''+@{/changePassword}+'\')'"><i class="icon  icon-comments"></i> <span>修改密码</span></a></li>-->
+    </ul>
+</div>
+<div id="content">
+
+</div>
+<!--Footer-part-->
+<div class="row-fluid">
+    <!--<div id="footer" class="span12"> @谭谈高考工作室版权所有 2007-2017 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 蜀ICP备13026621号-3 Copyright 2016</div>-->
+</div>
+<!--end-Footer-part-->
+<script th:src="@{js/jquery.min.js}"></script>
+<script th:src="@{js/jquery-browser.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{js/matrix.js}"></script>
+<script th:src="@{js/bootstrap-datepicker.js}"></script>
+<!--<script src="js/matrix.tables.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>-->
+<script th:src="@{js/wysihtml5-0.3.0.js}"></script>
+<script th:src="@{js/bootstrap-wysihtml5.js}"></script>
+<script th:src="@{js/bootstrapValidator.min.js}"></script>
+<script th:inline="javascript">
+    function loadPage(url,data,func) {
+        $("#content").load(url,data,func);
+    }
+    loadPage("default");
+
+    // 对Date的扩展，将 Date 转化为指定格式的String
+    // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+    // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+    // 例子：
+    // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+    // (new Date()).Format("yyyy-M-d h:m:s.S")   ==> 2006-7-2 8:9:4.18
+    Date.prototype.Format = function(fmt)
+    { //author: meizz
+        var o = {
+            "M+" : this.getMonth()+1,         //月份
+            "d+" : this.getDate(),          //日
+            "h+" : this.getHours(),          //小时
+            "m+" : this.getMinutes(),         //分
+            "s+" : this.getSeconds(),         //秒
+            "q+" : Math.floor((this.getMonth()+3)/3), //季度
+            "S" : this.getMilliseconds()       //毫秒
+        };
+        if(/(y+)/.test(fmt))
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        for(var k in o)
+            if(new RegExp("("+ k +")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        return fmt;
+    }
+
+
+    $(document).ready(function() {
+//        var token = $("meta[name='_csrf']").attr("content");
+//        var header = $("meta[name='_csrf_header']").attr("content");
+
+        $(document).ajaxSend(function(e, xhr, options) {
+            //xhr.setRequestHeader(header, token);
+        });
+    });
+</script>
+</body>
+
+
+</html>

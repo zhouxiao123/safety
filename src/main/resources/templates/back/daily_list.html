@@ -1,0 +1,57 @@
+
+
+<div id="content-header">
+    <div id="breadcrumb"></div>
+    <h1>日志列表</h1>
+</div>
+<div class="container-fluid">
+    <hr/>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                    <h5>日志列表</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <div style="padding:5px">
+
+                        <a href="javascript:void(0);" class="btn btn-success btn-mini" th:onclick="'dailyAdd()'">新增</a>
+
+                    </div>
+                    <table class="table table-bordered data-table">
+                        <thead>
+                        <tr>
+                            <th  style="width:30%">ID</th>
+                            <th  style="width:60%">文档名</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="gradeX" th:each="l:${logList}">
+                            <td th:text="${l.logid}">01</td>
+                            <td th:text="${l.logName}" >周肖</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script th:src="@{js/ajaxfileupload.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+
+    var msg = [[${msg}]];
+    if(msg!=null){
+        alert(msg);
+    }
+
+function dailyAdd(){
+    loadPage([[@{daily/daily_add}]]);
+}
+
+
+    /*]]>*/
+</script>
+

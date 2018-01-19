@@ -1,0 +1,47 @@
+<html th:fragment="my_pagination">
+<!--分页需要使用参数
+    isFirst     是否是第一页
+    isLast      是否是最后一页
+    pageSize    每页大小
+    totalPage   总共页数
+    pageOffset  当前页数(从0开始)
+-->
+<!--displayPage为显示的最大标签数量，只能为单数-->
+<ul th:with="displayPage=9">
+    <!--首页-->
+    <li th:if="${isFirst}"><a href="javascript:void(0)">首页</a></li>
+    <li th:if="${!isFirst}"><a href="javascript:void(0)" th:onclick="'loadPage(\'' + ${#httpServletRequest.getRequestURI()} + '\',{PageOffset:0,PageSize:' + ${pageSize} + (${search_name}==null? '':|,search_name:'${search_name}'|)+(${lid}==null? '':|,lid:'${lid}'|)+'})'">首页</a></li>
+
+    <!--上一页-->
+    <li th:if="${pageOffset==0}"><a href="javascript:void(0)">上一页</a></li>
+    <li th:if="${pageOffset &gt; 0}"><a href="javascript:void(0)" th:onclick="'loadPage(\'' + ${#httpServletRequest.getRequestURI()} + '\',{PageOffset:' + (${pageOffset} - 1) + ',PageSize:' + ${pageSize} + (${search_name}==null? '':|,search_name:'${search_name}'|)+(${lid}==null? '':|,lid:'${lid}'|)+'})'">上一页</a></li>
+
+    <!--详细页码-->
+    <li th:if="${totalPage &gt; displayPage and pageOffset*2 &gt; displayPage}"><a href="javascript:void(0)">...</a></li>
+
+    <li  th:if="${totalPage &lt;= displayPage}" th:each="pageNo : ${#numbers.sequence(0, totalPage - 1)}" th:class="${pageOffset==pageNo?  'active':''}">
+        <a th:if="${pageOffset!=pageNo}" href="javascript:void(0)"  th:onclick="'loadPage(\'' + ${#httpServletRequest.getRequestURI()} + '\',{PageOffset:' + ${pageNo} + ',PageSize:' + ${pageSize} + (${search_name}==null? '':|,search_name:'${search_name}'|)+(${lid}==null? '':|,lid:'${lid}'|)+'})'" th:text="${pageNo+1}"></a>
+        <a th:if="${pageOffset==pageNo}" href="javascript:void(0)"   th:text="${pageNo+1}"></a>
+    </li>
+
+    <li  th:if="${totalPage &gt; displayPage and pageOffset*2 &gt; displayPage }" th:each="pageNo : ${#numbers.sequence(pageOffset-(displayPage-1)/2, ((totalPage-pageOffset-1)*2) &gt; displayPage ? pageOffset+(displayPage-1)/2 : totalPage - 1)}" th:class="${pageOffset==pageNo?  'active':''}">
+        <a th:if="${pageOffset!=pageNo}" href="javascript:void(0)"  th:onclick="'loadPage(\'' + ${#httpServletRequest.getRequestURI()} + '\',{PageOffset:' + ${pageNo} + ',PageSize:' + ${pageSize} + (${search_name}==null? '':|,search_name:'${search_name}'|)+(${lid}==null? '':|,lid:'${lid}'|)+'})'" th:text="${pageNo+1}"></a>
+        <a th:if="${pageOffset==pageNo}" href="javascript:void(0)"   th:text="${pageNo+1}"></a>
+    </li>
+
+    <li  th:if="${totalPage &gt; displayPage and pageOffset*2 &lt;= displayPage }" th:each="pageNo : ${#numbers.sequence(0, (displayPage-1))}" th:class="${pageOffset==pageNo?  'active':''}">
+        <a th:if="${pageOffset!=pageNo}" href="javascript:void(0)"  th:onclick="'loadPage(\'' + ${#httpServletRequest.getRequestURI()} + '\',{PageOffset:' + ${pageNo} + ',PageSize:' + ${pageSize} + (${search_name}==null? '':|,search_name:'${search_name}'|)+(${lid}==null? '':|,lid:'${lid}'|)+'})'" th:text="${pageNo+1}"></a>
+        <a th:if="${pageOffset==pageNo}" href="javascript:void(0)"   th:text="${pageNo+1}"></a>
+    </li>
+
+    <li th:if="${totalPage &gt; displayPage and ((totalPage-pageOffset-1)*2) &gt; displayPage}"><a href="javascript:void(0)" >...</a></li>
+
+    <!--下一页-->
+    <li th:if="${pageOffset==(totalPage - 1)}"><a href="javascript:void(0)">下一页</a></li>
+    <li th:if="${pageOffset &lt; (totalPage - 1)}"><a href="javascript:void(0)" th:onclick="'loadPage(\'' + ${#httpServletRequest.getRequestURI()} + '\',{PageOffset:' + (${pageOffset} + 1) + ',PageSize:' + ${pageSize} + (${search_name}==null? '':|,search_name:'${search_name}'|)+(${lid}==null? '':|,lid:'${lid}'|)+'})'">下一页</a></li>
+
+    <!--末页-->
+    <li th:if="${isLast}"><a href="javascript:void(0)">末页</a></li>
+    <li th:if="${!isLast}"><a href="javascript:void(0)" th:onclick="'loadPage(\'' + ${#httpServletRequest.getRequestURI()} + '\',{PageOffset:'+${totalPage - 1}+',PageSize:' + ${pageSize} + (${search_name}==null? '':|,search_name:'${search_name}'|)+(${lid}==null? '':|,lid:'${lid}'|)+'})'">末页</a></li>
+</ul>
+</html>

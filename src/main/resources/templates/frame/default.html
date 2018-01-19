@@ -1,0 +1,104 @@
+<div id="content-header">
+    <div id="breadcrumb"><a href="main.html" th:href="@{/main}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a></div>
+    <h1>管理系统</h1>
+</div>
+<div class="container-fluid">
+    <hr/>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="whiteWapper clearfix">
+                <div class="user-img"><img src="images/user.png" /></div>
+                <div class="user-txt">
+                    <p>超级<span>管理员</span></p>
+                    <span>您好，欢迎登录管理系统</span>
+                </div>
+            </div>
+            <!--<div class="function">
+                <h5>功能介绍</h5>
+                <div class="accordion" id="collapse-group">
+                    <div class="accordion-group widget-box">
+                        <div class="accordion-heading">
+                            <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> <span class="icon"><i class="icon-comment"></i></span>
+                                <h5>资讯中心</h5>
+                            </a> </div>
+                        </div>
+                        <div class="collapse in accordion-body" id="collapseGOne">
+                            <div class="widget-content">
+                                <h5>资讯中心上传最新资讯与热点聚焦资料。使用方法如下：</h5>
+                                1、上传新资讯页面。<br/>
+                                <p>进入页面，选择上传资料所属的板块——最新资讯/热点聚焦，选择之后，填写标题、时间、内容等，完成之后点击“保存”即可。</p>
+                                <p>若放弃编写此信息点击“重置”，即可重新编辑新信息。</p>
+                                <p>点击“编辑”，即可编辑上传的资料内容。</p>
+                                <p>点击“取消”，即可取消此次编辑的资讯内容。</p>
+                                <img src="images/zx-up.png" />
+                                <br/>
+                                2、最新资讯和热点聚焦页面。<br/>
+                                <p>点击每条信息后面的“笔状图标”（下图红色图标），即可进入此信息的编辑页面，对此信息进行编辑更改。</p>
+                                <img src="images/zx-bj.png" />
+                                <p>点击每条信息后面的“差号图标”（下图红色图标），即可删除此条信息。</p>
+                                <img src="images/zx-sc.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group widget-box">
+                        <div class="accordion-heading">
+                            <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGThree" data-toggle="collapse"> <span class="icon"><i class="icon-user-md"></i></span>
+                                <h5>专家团队</h5>
+                            </a> </div>
+                        </div>
+                        <div class="collapse accordion-body" id="collapseGThree">
+                            <div class="widget-content">
+                                <h5>上传专家资料与专家团队内容管理。使用方法如下：</h5>
+                                1、上传专家资料。<br/>
+                                <p>进入页面，填写专家的姓名、简介、详细介绍等，并点击“上传图片”，选择专家照片。</p>
+                                <img src="images/zj-up.png" />
+                                <p>专家照片选择完成后，若图片错误，可以点击图片下方的“垃圾桶”，删除这张图片；若没有错误点击“上传”，上传专家图片；若想取消此次图片的上传操作，点击“清除”即可。</p>
+                                <img src="images/zj-up01.png" />
+                                <p>所有内容填写完毕，点击“保存”即可。</p>
+                                <p>若放弃编写此信息点击“重置”，即可重新编辑新信息。</p>
+                                <p>点击“编辑”，即可编辑上传的资料内容。</p>
+                                <p>点击“取消”，即可取消此次编辑的资讯内容。</p>
+                                <br/>
+                                2、专家团队页面。<br/>
+                                <p>点击每条专家后面的“编辑”，即可进入此专家的编辑页面，对此专家资料进行编辑更改。</p>
+                                <p>点击每条专家后面的“删除”，即可删除此专家。</p>
+                                <img src="images/zj-bj.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group widget-box">
+                        <div class="accordion-heading">
+                            <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGTwo" data-toggle="collapse"> <span class="icon"><i class=" icon-envelope-alt"></i></span>
+                                <h5>课程回顾</h5>
+                            </a> </div>
+                        </div>
+                        <div class="collapse accordion-body" id="collapseGTwo">
+                            <div class="widget-content">
+                                <h5>课程回顾上传精品课程与公益讲座资料。使用方法如下：</h5>
+                                1、上传课程资料。<br/>
+                                <p>进入页面，选择上传课程所属的板块——精品课程/公益讲座，选择之后，填写本次课程的主题、摘要、课程时间、课程内容等。</p>
+                                <img src="images/kc-up.png" />
+                                <p>课件图片上传：点击“上传图片”，选择要上传的课件图片，可以选择多张图片上传。</p>
+                                <img src="images/kc-up01.png" />
+                                <p>选择完成后，若图片错误，可以点击图片下方的“垃圾桶”，删除这张图片；若没有错误可以点击“上传”，上传图片，或者点击“上传图片”，继续选择图片进行上传；若想取消此次图片的上传操作，点击“清除”即可。</p>
+                                <img src="images/kc-up02.png" />
+                                <p>上传图片完成，可以点击“上传图片”，继续上传；也可以点击“清除”，删除上传的所有图片。</p>
+                                <img src="images/kc-up03.png" />
+                                <p>所有内容填写完毕，点击“保存”即可。</p>
+                                <p>若放弃编写此信息点击“重置”，即可重新编辑新信息。</p>
+                                <p>点击“编辑”，即可编辑上传的资料内容。</p>
+                                <p>点击“取消”，即可取消此次编辑的资讯内容。</p>
+                                <br/>
+                                2、精品课程和公益讲座页面。<br/>
+                                <p>点击每条课程后面的“编辑”，即可进入此信息的编辑页面，对此信息进行编辑更改。</p>
+                                <p>点击每条课程后面的“删除”，即可删除此课程。</p>
+                                <img src="images/kc-bj.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+
+    </div>
+</div>

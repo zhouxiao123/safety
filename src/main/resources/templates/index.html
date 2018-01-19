@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+        <title>管理系统</title>
+         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+		<link rel="stylesheet" th:href="@{css/bootstrap-responsive.min.css}" />
+        <link rel="stylesheet" th:href="@{css/matrix-login.css}" />
+        <link th:href="@{font-awesome/css/font-awesome.css}" rel="stylesheet" />
+
+<script>
+
+</script>
+    </head>
+    <body>
+        <div style="position: absolute;top: 0;text-align: center;background-color: cornsilk;width: 100%;"> <h3>管理系统</h3></div>
+        <div id="loginbox">            
+            <form id="loginform" class="form-vertical" th:action="@{login}" method="post">
+                <div class="control-group normal_text"> <h3 style="color: #000000;">用户登录</h3></div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_lg"><i class="icon-user"></i></span><input type="text" name="username" id="loginName" placeholder="用户名" />
+                            <span id="errorForLoginName" class="error" style="display: block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" name="password" id="password" placeholder="密码" />
+                            <span id="errorForPassWord" class="error" style="display: block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <!--<span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">忘记密码?</a></span>-->
+                    <span class="pull-right"><a  onclick="login()"  class="btn btn-success">登录</a></span>
+                </div>
+            </form>
+            <form id="recoverform" action="#" class="form-vertical">
+				<p class="normal_text">请输入您的邮箱地址，找回密码</p>
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input type="text" id="eMail" placeholder="邮箱地址" />
+                            <span id="errorForPassEmail" class="error" style="display: none"></span>
+                        </div>
+                    </div>
+               
+                <div class="form-actions">
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; 返回登录</a></span>
+                    <span class="pull-right"><a class="btn btn-info">确定</a></span>
+                </div>
+            </form>
+        </div>
+        
+        <script th:src="@{js/jquery.min.js}"></script>
+        <script th:src="@{js/matrix.login.js}"></script>
+        <script th:src="@{js/jquery-browser.js}"></script>
+    </body>
+<script th:inline="javascript">
+    var error = [[${param.error}]];
+    if(error) {
+        $("#errorForPassWord").html("用户名或密码有误！");
+        $("#errorForPassWord").css("display", "block");
+        $("#errorForLoginName").css("display", "none");
+    }
+    //console.log(document.getElementById("content"))
+    if(document.getElementById("content")){
+        window.location.href=[[@{login}]];
+    }
+</script>
+</html>
