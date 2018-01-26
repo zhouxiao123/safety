@@ -44,11 +44,18 @@
 <div id="sidebar">
     <a href="#" class="visible-phone"><i class="icon icon-list"></i>导航</a>
     <ul>
-        <li><a ><i class="icon icon-home"></i> <span>组织架构</span></a></li>
+        <!--<li><a ><i class="icon icon-home"></i> <span>组织架构</span></a></li>-->
         <li><a th:onclick="'loadPage(\''+@{/daily/daily_list}+'\')'"><i class="icon icon-home"></i> <span>日常服务</span></a></li>
-        <li><a ><i class="icon icon-home"></i> <span>应急管理</span></a></li>
+        <li class="submenu"><a href="#"><i class="icon  icon-comment"></i> <span>日常服务</span> <span
+                class="label label-important">3</span></a>
+            <ul>
+                <li><a th:onclick="'loadPage(\''+@{/daily/daily_list}+'\')'">日常日志</a></li>
+                <li><a th:onclick="'loadPage(\''+@{/month/month_list}+'\')'">月度日志</a></li>
+            </ul>
+        </li>
+        <!--<li><a ><i class="icon icon-home"></i> <span>应急管理</span></a></li>
         <li><a ><i class="icon icon-home"></i> <span>培训管理</span></a></li>
-        <li><a ><i class="icon icon-home"></i> <span>权限管理</span></a></li>
+        <li><a ><i class="icon icon-home"></i> <span>权限管理</span></a></li>-->
         <!--<li><a th:onclick="'loadPage(\''+@{/lecturer/list_lecturer}+'\')'"><i class="icon icon-home"></i> <span>用户管理</span></a></li>
         <li><a th:onclick="'loadPage(\''+@{/video/list_video}+'\')'"><i class="icon icon-home"></i> <span>视频管理</span></a></li>
 
