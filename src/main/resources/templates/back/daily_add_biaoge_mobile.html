@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>管理系统</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+</head>
+<style>
+    .table-c table{border-right:1px solid #000;border-bottom:1px solid #000}
+    .table-c table td{border-left:1px solid #000;border-top:1px solid #000}
+    .table-c table th{border-left:1px solid #000;border-top:1px solid #000}
+    /*
+    css 注释：
+    只对table td设置左与上边框；
+    对table设置右与下边框；
+    为了便于截图，我们将css 注释说明换行排版
+    */
+</style>
+<script th:src="@{js/jquery.min.js}"></script>
+<script>
+    var index = 0;
+    function change(){
+        var cla = $(".row");
+        //if(index == 1){
+        cla.each(function(ind){
+            if(ind==0){
+                $(this).find(".changeClass").eq(index).hide();
+                $(this).find(".changeClass").eq((index+1)).show();
+            } else {
+                $(this).find(".changeClass").eq(index).hide();
+                $(this).find(".changeClass").eq((index+1)).show();
+            }
+
+        });
+        index++;
+        //}
+        if(index==11)
+        {
+            $(".cS").show()
+            $(".cN").hide()
+        }
+        else {
+            $(".cS").hide()
+            $(".cN").show()
+        }
+        if(index==0)$(".cF").hide()
+        else $(".cF").show()
+        scrollTo(0,0);
+        $(".gz").hide()
+        $(".guzhang").hide();
+    }
+
+    function changeF(){
+        var cla = $(".row");
+        //if(index == 1){
+        cla.each(function(ind){
+            if(ind==0){
+                $(this).find(".changeClass").eq(index).hide();
+                $(this).find(".changeClass").eq((index-1)).show();
+            } else {
+                $(this).find(".changeClass").eq(index).hide();
+                $(this).find(".changeClass").eq((index-1)).show();
+            }
+
+        });
+        index--;
+        if(index==11)
+        {
+            $(".cS").show()
+            $(".cN").hide()
+        }
+        else {
+            $(".cS").hide()
+            $(".cN").show()
+        }
+        if(index==0)$(".cF").hide()
+        else $(".cF").show()
+        scrollTo(0,0);
+        $(".gz").hide()
+        $(".guzhang").hide();
+    }
+
+    function changeG(){
+        $(".gz").show()
+        $(".guzhang").hide();
+        $(".guzhang").eq(index).show();
+
+        $("input[name=isWrite]").eq(index).val(1)
+    }
+
+    function changeGC(){
+        $(".gz").hide()
+        $(".guzhang").hide();
+        $("input[name=isWrite]").eq(index).val(0)
+    }
+</script>
+<body>
+<form method="post" action="biaoge_save">
+<div class="widget-content nopadding">
+    <div class="table-c" style="text-align:center;font-size:16px">
+
+        <h1>招考网信息系统安全检查日志</h1>
+        <table style="margin:0 auto">
+            <tr>
+                <th style="width:25%">日期</th>
+                <th style="width:25%"></th>
+                <th style="width:25%">各地市检查情况（正常打“√”，异常打“╳”，并给予简要说明）</th>
+                <th style="width:20%">检查人</th>
+                <th style="width:5%">备注</th>
+            </tr>
+            <tr class="row">
+                <th>名字</th>
+                <th>检查项目</th>
+                <th class="changeClass" style="color:red">1.内江</th>
+                <th class="changeClass" style="color:red;display:none">2.自贡</th>
+                <th class="changeClass" style="display:none">3.宜宾</th>
+                <th class="changeClass" style="display:none">4.泸州</th>
+                <th class="changeClass" style="color:red;display:none">5.资阳</th>
+                <th class="changeClass" style="display:none">6.德阳</th>
+                <th class="changeClass" style="color:red;display:none">7.绵阳</th>
+                <th class="changeClass" style="display:none">8.广元</th>
+                <th class="changeClass" style="display:none">9.南充</th>
+                <th class="changeClass" style="color:red;display:none">10.雅安</th>
+                <th class="changeClass" style="color:red;display:none">11.攀枝花</th>
+                <th class="changeClass" style="display:none">12.四川招考网</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr class="row">
+                <td rowspan="5">网页及内容安全检查</td>
+                <td>网页访问是否正常</td>
+                <td class="changeClass">
+                    <select name="selectAs"  style="width:80px">
+                        <option selected="selected" value="1">√</option>
+                        <option value="2">x</option>
+                        <option value="3">无权限</option>
+                    </select>
+                </td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row">
+
+                <td>网站链接是否正常</td>
+                <td class="changeClass"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row">
+
+                <td>安全漏洞检查</td>
+                <td class="changeClass"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row">
+
+                <td>内容信息检查(抽样)</td>
+                <td class="changeClass"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px">
+                    <option selected="selected" value="1">√</option>
+                    <option value="2">x</option>
+                    <option value="3">无权限</option>
+                </select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row">
+
+                <td>网页篡改、植入恶意代码检查(抽样)</td>
+                <td class="changeClass"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row">
+                <td rowspan="3">运行安全</td>
+                <td>相关网络设备的运行检查</td>
+                <td class="changeClass"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row">
+
+                <td>病毒检查</td>
+                <td class="changeClass"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row">
+
+                <td>是否定时巡查</td>
+                <td class="changeClass"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row">
+                <td rowspan="2">数据库安全</td>
+                <td>数据库检查（被攻击、盗取、泄露）</td>
+                <td class="changeClass"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row">
+                <td>备份与恢复机制检查</td>
+                <td class="changeClass"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row">
+                <td>信息安全</td>
+                <td>后台账户和口令检查</td>
+                <td class="changeClass"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option value="1">√</option><option value="2">x</option><option selected="selected"  value="3">无权限</option></select></td>
+                <td class="changeClass" style="display:none"><select name="selectAs"  style="width:80px"><option selected="selected" value="1">√</option><option value="2">x</option><option value="3">无权限</option></select></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+    <div style="text-align:center;margin-top:40px">
+        <button class="cF" onclick="changeF()" style="display:none">上一页</button>
+        <button onclick="changeG()">填写故障单</button>
+
+        <button class="cN" onclick="change()">下一页</button>
+        <button class="cS" onclick="submit_t()"  style="display:none">提交</button>
+    </div>
+
+
+    <div class="table-c gz" style="text-align:center;display:none">
+
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >内江</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+        </table>
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >自贡</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+        </table>
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >宜宾</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+        </table>
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >泸州</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+        </table>
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >资阳</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+        </table>
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >德阳</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+        </table>
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >绵阳</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+        </table>
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >广元</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+        </table>
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >南充</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+        </table>
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >雅安</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+        </table>
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >攀枝花</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+        </table>
+
+        <table class="guzhang" style="margin:0 auto;display:none">
+
+            <tr>
+                <th style="width:25%">地区</th>
+                <td style="width:25%;color:red" >四川招考网</td>
+                <th style="width:25%">记录时间</th>
+                <td style="width:25%">1月3日9时00分</td>
+            </tr>
+            <tr>
+                <th>故障记录人</th>
+                <td></td>
+                <th >联系电话</th>
+                <td><input name="linkphone"/></td>
+            </tr>
+            <tr>
+                <th style="height:300px">故障记录</th>
+                <td style="height:300px" colspan="3" >
+                    <textarea name="gzjl"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+            </tr>
+
+
+
+
+            <tr>
+                <th rowspan="4"  >故障处理</th>
+                <th  colspan="2" >故障判断</th>
+                <th  >故障处理</th>
+
+            </tr>
+            <tr>
+
+                <td rowspan="3" colspan="2" >
+                    <textarea name="gzpd"></textarea>
+                </td>
+                <td  style="height:200px">
+                    <textarea name="gzcl"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <th  >备注</th>
+
+            </tr>
+            <tr>
+                <td  style="height:200px">
+                    <textarea name="bz"></textarea>
+                </td>
+
+            </tr>
+            <input name="isWrite" value="0"/>
+
+        </table>
+        <button onclick="changeGC()">不填写故障单</button>
+    </div>
+
+
+</div>
+</div>
+</form>
+</body>
+</html>
