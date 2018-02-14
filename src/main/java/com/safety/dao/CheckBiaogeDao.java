@@ -4,6 +4,11 @@ package com.safety.dao;
 import com.safety.entity.CheckBiaoge;
 import com.safety.entity.CheckGuzhang;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 管理员数据访问接口
@@ -11,5 +16,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface CheckBiaogeDao extends JpaRepository<CheckBiaoge,Long> {
 
+    @Query(value = "SELECT * FROM checkbiaoge WHERE  DATE_FORMAT(`time`,'%Y-%m-%d') = DATE_FORMAT(?1,'%Y-%m-%d')",nativeQuery = true)
+    List<CheckBiaoge> findCheckBiaogeByTime(Date time);
+
+    @Modifying
+    @Query(value = "delete from checkbiaoge  WHERE  DATE_FORMAT(`time`,'%Y-%m-%d') = DATE_FORMAT(?1,'%Y-%m-%d')",nativeQuery = true)
+    void deleteCheckBiaogeByTime(Date time);
 
 }

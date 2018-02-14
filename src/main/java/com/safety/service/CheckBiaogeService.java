@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * 管理员管理服务类接口
  * Created by QuiteWing_YJ on 2016/12/13.
@@ -27,6 +29,9 @@ import org.springframework.transaction.annotation.Transactional;
   */
  @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
  CheckBiaoge saveCheckBiaoge(CheckBiaoge cb);
+
+ @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
+ void deleteCheckBiaogeByTime(Date time);
 
 
 }

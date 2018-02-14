@@ -126,6 +126,8 @@
         $("input[name=isWrite]").eq(index).val(0)
     }
     function submit_t(){
+        $(".cS").attr("disabled","disabled")
+        $("#backg").show();
         $("#subform").submit()
     }
 </script>
@@ -1208,6 +1210,9 @@
 
 </div>
 </form>
+<div id="backg" style="display:none;background-color:#000;width:100%;height:100%;position:absolute;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;top:0">
+    <img src="images/load.gif" style="position:fixed;left:45%;top:50%"/>
+</div>
 </body>
 <script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/

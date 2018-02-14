@@ -135,6 +135,8 @@ public class DailyController {
                              @RequestParam String[] gzpd,
                              @RequestParam String[] gzcl,
                              @RequestParam String[] bz) {
+
+        checkBiaogeService.deleteCheckBiaogeByTime(new Date());
         //一
         CheckBiaoge cb = new CheckBiaoge();
         cb.setTag1(selectAs1[0]);
@@ -555,7 +557,9 @@ public class DailyController {
             cg.setLocal(cb12.getName());
             checkGuzhangService.saveCheckGuzhang(cg);
         }
-        return "back/daily_add_biaoge_mobile";
+
+        model.addAttribute("msg","保存成功!");
+        return "back/daily_list_biaoge_mobile";
     }
 
     private static String getLocal(Integer i){
