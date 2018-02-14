@@ -6,6 +6,8 @@ import com.safety.entity.AdminUser;
 import com.safety.service.AdminService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,8 +62,13 @@ public class BasicController {
      * @return 跳转到后台首页
      */
     @RequestMapping("/main")
-    public String main() {
-        return "back/main";
+    public String main(Model model,HttpServletRequest request) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+        AdminUser au = adminService.findByLoginName(userDetails.getUsername());
+        model.addAttribute("user",au);
+        return "back/daily_add_biaoge_mobile";
     }
 
 
