@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 管理员管理服务类接口
@@ -29,6 +30,9 @@ import java.util.Date;
   */
  @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
  CheckBiaoge saveCheckBiaoge(CheckBiaoge cb);
+
+ @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
+ List<CheckBiaoge> findCheckBiaoge();
 
  @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
  void deleteCheckBiaogeByTime(Date time);

@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -107,6 +108,17 @@ public class DailyController {
         return "back/daily_add_biaoge_mobile";
     }
 
+    @RequestMapping("/daily_list_biaoge_mobile")
+    public String DailyListBiaogeMobile(Model model,@RequestParam (required = false) Integer add) {
+
+        List<CheckBiaoge> cs = checkBiaogeService.findCheckBiaoge();
+        model.addAttribute("cs",cs);
+        if(add!=null && add==1){
+            model.addAttribute("msg","保存成功!");
+        }
+        return "back/daily_list_biaoge_mobile";
+    }
+
 
     /**
      * 登陆页面
@@ -136,7 +148,7 @@ public class DailyController {
                              @RequestParam String[] gzcl,
                              @RequestParam String[] bz) {
 
-        checkBiaogeService.deleteCheckBiaogeByTime(new Date());
+        checkBiaogeService.deleteCheckBiaogeByTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         //一
         CheckBiaoge cb = new CheckBiaoge();
         cb.setTag1(selectAs1[0]);
@@ -558,8 +570,8 @@ public class DailyController {
             checkGuzhangService.saveCheckGuzhang(cg);
         }
 
-        model.addAttribute("msg","保存成功!");
-        return "back/daily_list_biaoge_mobile";
+
+        return "redirect:daily_list_biaoge_mobile?add=1";
     }
 
     private static String getLocal(Integer i){

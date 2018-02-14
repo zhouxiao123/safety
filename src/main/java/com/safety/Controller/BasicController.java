@@ -63,12 +63,13 @@ public class BasicController {
      */
     @RequestMapping("/main")
     public String main(Model model,HttpServletRequest request) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+        /*UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
         AdminUser au = adminService.findByLoginName(userDetails.getUsername());
-        model.addAttribute("user",au);
-        return "back/daily_add_biaoge_mobile";
+        model.addAttribute("user",au);*/
+        System.out.println("---------");
+        return "redirect:daily/daily_list_biaoge_mobile";
     }
 
 

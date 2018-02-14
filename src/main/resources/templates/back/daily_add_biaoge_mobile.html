@@ -16,11 +16,11 @@
     为了便于截图，我们将css 注释说明换行排版
     */
 </style>
-<link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
-<link rel="stylesheet" th:href="@{css/datepicker.css}" />
-<script th:src="@{js/jquery.min.js}"></script>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" th:href="@{/css/datepicker.css}" />
+<script th:src="@{/js/jquery.min.js}"></script>
 
-<script th:src="@{js/bootstrap-datepicker.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.js}"></script>
 <script>
     // 对Date的扩展，将 Date 转化为指定格式的String
     // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
@@ -133,7 +133,7 @@
 </script>
 <body>
 <a href="/safety/logout">退出</a>
-<form method="post" id="subform" action="daily/biaoge_save">
+<form method="post" id="subform" th:action="@{/daily/biaoge_save}">
 <div class="widget-content nopadding">
     <div class="table-c" style="text-align:center;font-size:16px">
 
@@ -1210,8 +1210,8 @@
 
 </div>
 </form>
-<div id="backg" style="display:none;background-color:#000;width:100%;height:100%;position:absolute;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;top:0">
-    <img src="images/load.gif" style="position:fixed;left:45%;top:50%"/>
+<div id="backg" style="display:none;background-color:#000;width:100%;height:300%;position:absolute;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;top:0">
+    <img th:src="@{/images/load.gif}" style="position:fixed;left:45%;top:50%"/>
 </div>
 </body>
 <script type="text/javascript" th:inline="javascript">

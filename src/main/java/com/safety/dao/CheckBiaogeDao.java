@@ -19,6 +19,10 @@ public interface CheckBiaogeDao extends JpaRepository<CheckBiaoge,Long> {
     @Query(value = "SELECT * FROM checkbiaoge WHERE  DATE_FORMAT(`time`,'%Y-%m-%d') = DATE_FORMAT(?1,'%Y-%m-%d')",nativeQuery = true)
     List<CheckBiaoge> findCheckBiaogeByTime(Date time);
 
+
+    @Query(value = "SELECT * FROM checkbiaoge GROUP BY `time`",nativeQuery = true)
+    List<CheckBiaoge> findCheckBiaoge();
+
     @Modifying
     @Query(value = "delete from checkbiaoge  WHERE  DATE_FORMAT(`time`,'%Y-%m-%d') = DATE_FORMAT(?1,'%Y-%m-%d')",nativeQuery = true)
     void deleteCheckBiaogeByTime(Date time);

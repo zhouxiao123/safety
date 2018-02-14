@@ -16,11 +16,11 @@
     为了便于截图，我们将css 注释说明换行排版
     */
 </style>
-<link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
-<link rel="stylesheet" th:href="@{css/datepicker.css}" />
-<script th:src="@{js/jquery.min.js}"></script>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" th:href="@{/css/datepicker.css}" />
+<script th:src="@{/js/jquery.min.js}"></script>
 
-<script th:src="@{js/bootstrap-datepicker.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.js}"></script>
 <script>
     // 对Date的扩展，将 Date 转化为指定格式的String
     // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
@@ -131,23 +131,40 @@
 </script>
 <body>
 <a href="/safety/logout">退出</a>
-<form method="post" id="subform" action="daily/biaoge_save">
-<div class="widget-content nopadding">
-    <div class="table-c" style="text-align:center;font-size:16px">
+<div class="container-fluid">
+    <hr/>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                    <h5>日志列表</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <div style="padding:5px">
 
-        <h1>招考网信息系统安全检查日志</h1>
+                        <a href="daily_add_biaoge_mobile" class="btn btn-success btn-mini" >新增</a>
 
+                    </div>
+                    <table class="table table-bordered data-table">
+                        <thead>
+                        <tr>
+                            <th  style="width:30%">填写人</th>
+                            <th  style="width:60%">日志日期</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="gradeX" th:each="l:${cs}">
+                            <td th:text="${l.checkuser}">01</td>
+                            <td th:text="${l.time}" >周肖</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
+        </div>
     </div>
-
-
-
-
-
-
-
 </div>
-</form>
 </body>
 <script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/

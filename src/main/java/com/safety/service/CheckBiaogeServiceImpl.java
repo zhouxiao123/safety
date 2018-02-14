@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 管理员服务类接口实现类
@@ -28,6 +29,11 @@ public class CheckBiaogeServiceImpl implements  CheckBiaogeService {
     @Override
     public CheckBiaoge saveCheckBiaoge(CheckBiaoge cb) {
         return checkBiaogeDao.save(cb);
+    }
+
+    @Override
+    public List<CheckBiaoge> findCheckBiaoge() {
+        return checkBiaogeDao.findCheckBiaoge();
     }
 
     @Override
