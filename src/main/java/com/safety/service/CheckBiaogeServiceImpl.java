@@ -40,4 +40,9 @@ public class CheckBiaogeServiceImpl implements  CheckBiaogeService {
     public void deleteCheckBiaogeByTime(Date time) {
         checkBiaogeDao.deleteCheckBiaogeByTime(time);
     }
+
+    @Override
+    public List<CheckBiaoge> findCheckBiaogeByNameAndStartAndEndTime(String name, String start, String end) {
+        return checkBiaogeDao.findCheckBiaogeByNameAndStartAndEndTime(name,start,end);
+    }
 }

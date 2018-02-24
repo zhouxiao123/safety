@@ -140,42 +140,74 @@
                     <h5>日志列表</h5>
                 </div>
                 <div class="widget-content nopadding">
-                    <div style="padding:5px">
 
+
+
+                        <h5 style="display:inline-block">搜索</h5>
+                        <div style="display:inline-block;line-height:30px">
+                            <select name="name">
+                                <!--<option value="0">全部</option>-->
+                                <option value="内江">内江</option>
+                                <option value="自贡">自贡</option>
+                                <option value="宜宾">宜宾</option>
+                                <option value="泸州">泸州</option>
+                                <option value="资阳">资阳</option>
+                                <option value="德阳">德阳</option>
+                                <option value="绵阳">绵阳</option>
+                                <option value="广元">广元</option>
+                                <option value="南充">南充</option>
+                                <option value="雅安">雅安</option>
+                                <option value="攀枝花">攀枝花</option>
+                                <option value="四川招考网">四川招考网</option>
+                            </select>
+                        </div>
+                        <input type="text" name="start"  data-date-format="yyyy-mm-dd"
+                               class="datepicker01 span11" style="width:200px"/>
+                        <input type="text"  name="end"  data-date-format="yyyy-mm-dd"
+                               class="datepicker01 span11"  style="width:200px"/>
+                        <input type="button" value="导出" onclick="exportBt(this)"/>
+                    <!--<a href="export_excel" class="btn btn-primary btn-mini" >导出</a>-->
+
+                    <div style="display:inline-block;margin-left:50px">
                         <a href="daily_add_biaoge_mobile" class="btn btn-success btn-mini" >新增</a>
-
                     </div>
-                    <table class="table table-bordered data-table">
-                        <thead>
-                        <tr>
-                            <th  style="width:30%">填写人</th>
-                            <th  style="width:60%">日志日期</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="gradeX" th:each="l:${cs}">
-                            <td th:text="${l.checkuser}">01</td>
-                            <td th:text="${l.time}" >周肖</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
+
+
+                <table class="table table-bordered data-table">
+                    <thead>
+                    <tr>
+                        <th  style="width:30%">填写人</th>
+                        <th  style="width:60%">日志日期</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="gradeX" th:each="l:${cs}">
+                        <td th:text="${l.checkuser}">01</td>
+                        <td th:text="${l.time}" >周肖</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
     </div>
+</div>
 </div>
 </body>
 <script type="text/javascript" th:inline="javascript">
-    /*<![CDATA[*/
-    var msg = [[${msg}]];
-    if(msg!=null){
-        alert(msg);
-    }
-    $('.datepicker01').datepicker();
-    $(".datepicker01").val(new Date().Format("yyyy-MM-dd"));
+/*<![CDATA[*/
+var msg = [[${msg}]];
+if(msg!=null){
+    alert(msg);
+}
+$('.datepicker01').datepicker();
+$(".datepicker01").val(new Date().Format("yyyy-MM-dd"));
+function exportBt(this_){
+    window.location.href="export_excel?name="+$("select[name=name]").val()+"&start="+$("input[name=start]").val()+"&end="+$("input[name=end]").val()
 
+}
 
-    /*]]>*/
+/*]]>*/
 </script>
 </html>

@@ -37,5 +37,8 @@ import java.util.List;
  @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
  void deleteCheckBiaogeByTime(Date time);
 
+ @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
+ List<CheckBiaoge> findCheckBiaogeByNameAndStartAndEndTime(String name,String start,String end);
+
 
 }

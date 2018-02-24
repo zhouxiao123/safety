@@ -33,8 +33,17 @@ public class CheckBiaoge {
     private Integer tag9;
     private Integer tag10;
     private Integer tag11;
+    private Integer iswrite;
     private Date time;
     private Date createtime;
+
+    public Integer getIswrite() {
+        return iswrite;
+    }
+
+    public void setIswrite(Integer iswrite) {
+        this.iswrite = iswrite;
+    }
 
     public Long getId() {
         return id;

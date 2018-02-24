@@ -2,31 +2,41 @@ package com.safety.Controller;
 
 
 
-import com.safety.entity.AdminUser;
+
 import com.safety.entity.CheckBiaoge;
 import com.safety.entity.CheckGuzhang;
 import com.safety.entity.DailyLog;
-import com.safety.service.AdminService;
 import com.safety.service.CheckBiaogeService;
 import com.safety.service.CheckGuzhangService;
 import com.safety.service.DailyLogService;
 import com.safety.util.DateFormatter;
 import com.safety.util.FileUploadUtils;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import com.safety.util.FileUtils;
+
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -164,7 +174,7 @@ public class DailyController {
         cb.setTag11(selectAs1[10]);
         cb.setName(getLocal(0));
         cb.setCheckuser(checkuser);
-
+        cb.setIswrite(isWrite[0]);
         cb.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb);
@@ -199,7 +209,7 @@ public class DailyController {
         cb2.setTag11(selectAs2[10]);
         cb2.setName(getLocal(1));
         cb2.setCheckuser(checkuser);
-
+        cb2.setIswrite(isWrite[1]);
         cb2.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb2.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb2);
@@ -235,7 +245,7 @@ public class DailyController {
         cb3.setTag11(selectAs3[10]);
         cb3.setName(getLocal(2));
         cb3.setCheckuser(checkuser);
-
+        cb3.setIswrite(isWrite[2]);
         cb3.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb3.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb3);
@@ -270,7 +280,7 @@ public class DailyController {
         cb4.setTag11(selectAs4[10]);
         cb4.setName(getLocal(3));
         cb4.setCheckuser(checkuser);
-
+        cb4.setIswrite(isWrite[3]);
         cb4.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb4.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb4);
@@ -305,7 +315,7 @@ public class DailyController {
         cb5.setTag11(selectAs5[10]);
         cb5.setName(getLocal(4));
         cb5.setCheckuser(checkuser);
-
+        cb5.setIswrite(isWrite[4]);
         cb5.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb5.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb5);
@@ -340,7 +350,7 @@ public class DailyController {
         cb6.setTag11(selectAs6[10]);
         cb6.setName(getLocal(5));
         cb6.setCheckuser(checkuser);
-
+        cb6.setIswrite(isWrite[5]);
         cb6.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb6.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb6);
@@ -375,7 +385,7 @@ public class DailyController {
         cb7.setTag11(selectAs7[10]);
         cb7.setName(getLocal(6));
         cb7.setCheckuser(checkuser);
-
+        cb7.setIswrite(isWrite[6]);
         cb7.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb7.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb7);
@@ -410,7 +420,7 @@ public class DailyController {
         cb8.setTag11(selectAs8[10]);
         cb8.setName(getLocal(7));
         cb8.setCheckuser(checkuser);
-
+        cb8.setIswrite(isWrite[7]);
         cb8.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb8.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb8);
@@ -445,7 +455,7 @@ public class DailyController {
         cb9.setTag11(selectAs9[10]);
         cb9.setName(getLocal(8));
         cb9.setCheckuser(checkuser);
-
+        cb9.setIswrite(isWrite[8]);
         cb9.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb9.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb9);
@@ -480,7 +490,7 @@ public class DailyController {
         cb10.setTag11(selectAs10[10]);
         cb10.setName(getLocal(9));
         cb10.setCheckuser(checkuser);
-
+        cb10.setIswrite(isWrite[9]);
         cb10.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb10.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb10);
@@ -515,7 +525,7 @@ public class DailyController {
         cb11.setTag11(selectAs11[10]);
         cb11.setName(getLocal(10));
         cb11.setCheckuser(checkuser);
-
+        cb11.setIswrite(isWrite[10]);
         cb11.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb11.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb11);
@@ -550,7 +560,7 @@ public class DailyController {
         cb12.setTag11(selectAs12[10]);
         cb12.setName(getLocal(11));
         cb12.setCheckuser(checkuser);
-
+        cb12.setIswrite(isWrite[11]);
         cb12.setTime(DateFormatter.stringToDate(checktime,"yyyy-MM-dd"));
         cb12.setCreatetime(new Date());
         checkBiaogeService.saveCheckBiaoge(cb12);
@@ -591,6 +601,479 @@ public class DailyController {
             default:return "四川招考网";
 
         }
+    }
+
+    /**
+     * 导出excel
+     */
+    @RequestMapping("/export_excel")
+    public void exportExcel(HttpServletResponse response,@RequestParam String name,@RequestParam String start,@RequestParam String end){
+        Map<String, Object> param = new HashMap<String, Object>();
+        List<CheckBiaoge> checkBiaoges = checkBiaogeService.findCheckBiaogeByNameAndStartAndEndTime("%"+name+"%",start,end);
+
+        Integer len = checkBiaoges.size();
+        /*if(checkBiaoges.size()==0){
+
+        }*/
+        String sep = System.getProperty("file.separator");
+        String fileDir = FileUploadUtils.tempPath;// 存放文件文件夹名称
+        String path=fileDir;
+        String excelPath = path + sep + "excel" + ".xlsx";
+        File dirPath = new File(path);
+        if (!dirPath.exists()) {
+            dirPath.mkdirs();
+        }
+        try{
+
+            XSSFWorkbook work = new XSSFWorkbook ();
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            FileOutputStream fileOut = new FileOutputStream(path + sep
+                    + "excel" + ".xlsx");
+
+			/*fm.getPl_name() + "_" + fm.getPl_section_name()
+			+ df.format(fm.getCreate_date())*/
+
+            XSSFSheet sheet1 = work.createSheet("sheet1");
+
+            sheet1.addMergedRegion(new CellRangeAddress(0,0,0,len+1));
+            //sheet1.addMergedRegion(new CellRangeAddress(2,len+2,13,len+2));
+            if(len!=0) {
+                sheet1.addMergedRegion(new CellRangeAddress(1, 1, 2, len + 1));
+            }
+            sheet1.addMergedRegion(new CellRangeAddress(3,7,0,0));
+            sheet1.addMergedRegion(new CellRangeAddress(8,10,0,0));
+            sheet1.addMergedRegion(new CellRangeAddress(11,12,0,0));
+            sheet1.addMergedRegion(new CellRangeAddress(14,14,0,1));
+
+            XSSFCell cell;
+
+            //设置列宽度
+            sheet1.setColumnWidth(0, 10*256);
+            sheet1.setColumnWidth(1, 20*256);
+            sheet1.setColumnWidth(2, 20*256);
+            sheet1.setColumnWidth(3, 20*256);
+            sheet1.setColumnWidth(4, 20*256);
+            sheet1.setColumnWidth(5, 20*256);
+            sheet1.setColumnWidth(6, 20*256);
+            sheet1.setColumnWidth(7, 20*256);
+
+
+            // 标题格式
+            CellStyle cellStyle = work.createCellStyle();
+            // 表头格式
+            CellStyle titleStyle = work.createCellStyle();
+            // 内容格式
+            CellStyle dataStyle = work.createCellStyle();
+
+            //居中
+            cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+            cellStyle.setBorderRight(CellStyle.BORDER_THIN);
+            cellStyle.setRightBorderColor(IndexedColors.BLACK.getIndex());
+            cellStyle.setBorderLeft(CellStyle.BORDER_THIN);
+            cellStyle.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+            cellStyle.setBorderTop(CellStyle.BORDER_THIN);
+            cellStyle.setTopBorderColor(IndexedColors.BLACK.getIndex());
+            cellStyle.setBorderBottom(CellStyle.BORDER_THIN);
+            cellStyle.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+
+            titleStyle.setAlignment(CellStyle.ALIGN_CENTER);
+            titleStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+            titleStyle.setWrapText(true);
+            titleStyle.setBorderRight(CellStyle.BORDER_THIN);
+            titleStyle.setRightBorderColor(IndexedColors.BLACK.getIndex());
+            titleStyle.setBorderLeft(CellStyle.BORDER_THIN);
+            titleStyle.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+            titleStyle.setBorderTop(CellStyle.BORDER_THIN);
+            titleStyle.setTopBorderColor(IndexedColors.BLACK.getIndex());
+            titleStyle.setBorderBottom(CellStyle.BORDER_THIN);
+            titleStyle.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+
+            dataStyle.setAlignment(CellStyle.ALIGN_CENTER);
+            dataStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+            dataStyle.setWrapText(true);
+            dataStyle.setAlignment(CellStyle.ALIGN_CENTER);
+            dataStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+            dataStyle.setWrapText(true);
+            dataStyle.setBorderRight(CellStyle.BORDER_THIN);
+            dataStyle.setRightBorderColor(IndexedColors.BLACK.getIndex());
+            dataStyle.setBorderLeft(CellStyle.BORDER_THIN);
+            dataStyle.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+            dataStyle.setBorderTop(CellStyle.BORDER_THIN);
+            dataStyle.setTopBorderColor(IndexedColors.BLACK.getIndex());
+            dataStyle.setBorderBottom(CellStyle.BORDER_THIN);
+            dataStyle.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+
+            // 标题字体
+            Font font = work.createFont();
+            // 表头字体
+            Font titlefont = work.createFont();
+            // 内容字体
+            Font datafont = work.createFont();
+
+            font.setFontHeightInPoints((short) 30);
+            font.setFontName("方正仿宋简体");
+            font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+
+            titlefont.setFontHeightInPoints((short) 16);
+            titlefont.setFontName("方正仿宋简体");
+            titlefont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+            titlefont.setColor(IndexedColors.RED.getIndex());
+
+
+            datafont.setFontHeightInPoints((short) 16);
+            datafont.setFontName("方正仿宋简体");
+            datafont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+            //datafont.setColor(HSSFColor.RED.index);
+
+            //把字体加入到格式中
+            cellStyle.setFont(font);
+            titleStyle.setFont(titlefont);
+            dataStyle.setFont(datafont);
+
+            //int row_index = 0;
+            XSSFRow row;
+            /*row_index++;
+            for(int i = 0; i < 14; i++) {
+                cell = row.createCell(i);
+                cell.setCellStyle(dataStyle);
+                cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+            }*/
+            for(int i = 0; i < 15; i++) {
+                row = sheet1.createRow(i);
+            }
+            /**
+             * 第一行
+             */
+            row = sheet1.getRow(0);
+            cell = row.createCell(0);
+            cell.setCellStyle(cellStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("招考网信息系统安全检查日志");
+
+            /**
+             * 第二行
+             */
+            row = sheet1.getRow(1);
+            //第一列
+            cell = row.createCell(0);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("地区");
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(titleStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue(name);
+            //第三列
+            cell = row.createCell(2);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("检查情况（正常打“√”，异常打“╳”）");
+
+
+            /**
+             *第三行
+             **/
+            row = sheet1.getRow(2);
+            //第一列
+            cell = row.createCell(0);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("名称");
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("检查项目");
+
+
+            /**
+             *第四行
+             **/
+            row = sheet1.getRow(3);
+            //第一列
+            cell = row.createCell(0);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("网页及内容安全检查");
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("网页访问是否正常");
+
+            /**
+             *第五行
+             **/
+            row = sheet1.getRow(4);
+
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("网站链接是否正常");
+
+            /**
+             *第六行
+             **/
+            row = sheet1.getRow(5);
+
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("安全漏洞检查");
+
+            /**
+             *第七行
+             **/
+            row = sheet1.getRow(6);
+
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("内容信息检查(抽样)");
+
+            /**
+             *第八行
+             **/
+            row = sheet1.getRow(7);
+
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("网页篡改、植入恶意代码检查(抽样)");
+
+
+
+            /**
+             *第九行
+             **/
+            row = sheet1.getRow(8);
+            //第一列
+            cell = row.createCell(0);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("运行安全");
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("相关网络设备的运行检查");
+
+            /**
+             *第十行
+             **/
+            row = sheet1.getRow(9);
+
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("病毒检查");
+
+            /**
+             *第十一行
+             **/
+            row = sheet1.getRow(10);
+
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("是否定时巡查");
+
+
+            /**
+             *第十二行
+             **/
+            row = sheet1.getRow(11);
+            //第一列
+            cell = row.createCell(0);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("数据库安全");
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("数据库检查（被攻击、盗取、泄露）");
+
+            /**
+             *第十三行
+             **/
+            row = sheet1.getRow(12);
+
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("备份与恢复机制检查");
+
+            /**
+             *第十四行
+             **/
+            row = sheet1.getRow(13);
+            //第一列
+            cell = row.createCell(0);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("信息安全");
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("后台账户和口令检查");
+
+            /**
+             *第十五行
+             **/
+            row = sheet1.getRow(14);
+            //第一列
+            cell = row.createCell(0);
+            cell.setCellStyle(dataStyle);
+            cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+            cell.setCellValue("检查人");
+            //第二列
+            cell = row.createCell(1);
+            cell.setCellStyle(dataStyle);
+
+
+
+
+            Integer j = 0;
+            for(CheckBiaoge cb : checkBiaoges){
+
+                    //第二行
+                    row = sheet1.getRow(1);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellValue("检查情况（正常打“√”，异常打“╳”）");
+
+                    //第三行
+                    row = sheet1.getRow(2);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(df.format(cb.getTime()));
+
+                    //第四行
+                    row = sheet1.getRow(3);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getTag1()==1?"√":cb.getTag1()==2?"×":"无权限");
+                    //第五行
+                    row = sheet1.getRow(4);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getTag2()==1?"√":cb.getTag2()==2?"×":"无权限");
+                    //第六行
+                    row = sheet1.getRow(5);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getTag3()==1?"√":cb.getTag3()==2?"×":"无权限");
+                    //第七行
+                    row = sheet1.getRow(6);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getTag4()==1?"√":cb.getTag4()==2?"×":"无权限");
+                    //第八行
+                    row = sheet1.getRow(7);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getTag5()==1?"√":cb.getTag5()==2?"×":"无权限");
+                    //第九行
+                    row = sheet1.getRow(8);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getTag6()==1?"√":cb.getTag6()==2?"×":"无权限");
+                    //第十行
+                    row = sheet1.getRow(9);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getTag7()==1?"√":cb.getTag7()==2?"×":"无权限");
+                    //第十一行
+                    row = sheet1.getRow(10);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getTag8()==1?"√":cb.getTag8()==2?"×":"无权限");
+                    //第十二行
+                    row = sheet1.getRow(11);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getTag9()==1?"√":cb.getTag9()==2?"×":"无权限");
+                    //第十三行
+                    row = sheet1.getRow(12);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getTag10()==1?"√":cb.getTag10()==2?"×":"无权限");
+                    //第十四行
+                    row = sheet1.getRow(13);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getTag11()==1?"√":cb.getTag11()==2?"×":"无权限");
+                    //第十五行
+                    row = sheet1.getRow(14);
+                    cell = row.createCell(2+j);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(cb.getCheckuser());
+                    j++;
+
+
+
+
+
+                /*for(OrderCommodity oc : order.getDetailList()) {
+                    if(!isBegin) {
+                        row = sheet1.createRow(row_index);
+                    }
+                    cell = row.createCell(5);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(oc.getName());
+                    cell = row.createCell(6);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(oc.getArt_no());
+                    cell = row.createCell(7);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(oc.getPrice());
+                    cell = row.createCell(8);
+                    cell.setCellStyle(dataStyle);
+                    cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(oc.getQuantity());
+                    isBegin = false;
+                    row_index++;
+                }*/
+            }
+
+            //将创建好的excel存到指定文件夹下
+            work.write(fileOut);
+            fileOut.close();
+            //压缩文件夹并下载，下载后删除文件夹
+            FileUtils.createZip(response, excelPath, DateFormatter.dateToString(new Date(), "yyyy-MM-dd_HH:mm:ss:SSS"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
 }
