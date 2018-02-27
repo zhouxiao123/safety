@@ -712,7 +712,7 @@ public class DailyController {
             // 内容字体
             Font datafont = work.createFont();
 
-            font.setFontHeightInPoints((short) 30);
+            font.setFontHeightInPoints((short) 24);
             font.setFontName("方正仿宋简体");
             font.setBoldweight(Font.BOLDWEIGHT_BOLD);
 
@@ -750,7 +750,7 @@ public class DailyController {
             cell = row.createCell(0);
             cell.setCellStyle(cellStyle);
             cell.setCellType(XSSFCell.CELL_TYPE_STRING);
-            cell.setCellValue("招考网信息系统安全检查日志");
+            cell.setCellValue("招考网信息系统安全检查日志-四川昭信教育安全运维组-导出时间"+df.format(new Date()));
 
             /**
              * 第二行
