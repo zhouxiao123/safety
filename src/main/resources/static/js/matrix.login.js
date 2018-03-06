@@ -75,11 +75,11 @@ function checkPassword() {
 function login() {
     var loginName = $("#loginName").val();
     var password = $("#password").val();
-    if(!checkFinally()){
+    /*if(!checkFinally()){
         $("#errorForPassWord").html("数据不能为空！");
         $("#errorForPassWord").css("display", "block");
         return false;
-    }
+    }*/
 
     $("#loginform").submit();
     /*$.ajax({
