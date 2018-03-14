@@ -269,7 +269,7 @@ public class FileUtils {
     private static void writeZip(File file, String parentPath, ZipOutputStream zos) {
         if(file.exists()){
             if(file.isDirectory()){//处理文件夹
-                parentPath+=file.getName()+File.separator;
+                parentPath +=file.getName()+File.separator;
                 File [] files=file.listFiles();
                 for(File f:files){
                     writeZip(f, parentPath, zos);

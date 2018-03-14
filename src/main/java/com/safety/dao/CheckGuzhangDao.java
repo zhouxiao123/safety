@@ -11,5 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface CheckGuzhangDao extends JpaRepository<CheckGuzhang,Long> {
 
+    CheckGuzhang findByCheckbiaogeid(Long checkbiaogeid);
+
 
 }

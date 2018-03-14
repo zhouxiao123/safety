@@ -25,4 +25,9 @@ public class CheckGuzhangServiceImpl implements  CheckGuzhangService {
     public CheckGuzhang saveCheckGuzhang(CheckGuzhang cb) {
         return checkGuzhangDao.save(cb);
     }
+
+    @Override
+    public CheckGuzhang findByCheckbiaogeid(Long checkbiaogeid) {
+        return checkGuzhangDao.findByCheckbiaogeid(checkbiaogeid);
+    }
 }

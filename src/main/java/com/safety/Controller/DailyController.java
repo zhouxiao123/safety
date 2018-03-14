@@ -618,8 +618,8 @@ public class DailyController {
         String sep = System.getProperty("file.separator");
         String fileDir = FileUploadUtils.tempPath;// 存放文件文件夹名称
         String path=fileDir;
-        String excelPath = path + sep + "excel" + ".xlsx";
-        File dirPath = new File(path);
+        String excelPath = path + sep + "excel";
+        File dirPath = new File(excelPath);
         if (!dirPath.exists()) {
             dirPath.mkdirs();
         }
@@ -628,7 +628,7 @@ public class DailyController {
             XSSFWorkbook work = new XSSFWorkbook ();
 
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            FileOutputStream fileOut = new FileOutputStream(path + sep
+            FileOutputStream fileOut = new FileOutputStream(excelPath + sep
                     + "excel" + ".xlsx");
 
 			/*fm.getPl_name() + "_" + fm.getPl_section_name()
@@ -1034,6 +1034,308 @@ public class DailyController {
                     cell.setCellType(XSSFCell.CELL_TYPE_STRING);
                     cell.setCellValue(cb.getCheckuser());
                     j++;
+
+                    if(cb.getIswrite()==1){
+                        CheckGuzhang cg = checkGuzhangService.findByCheckbiaogeid(cb.getId());
+
+                        XSSFWorkbook work2 = new XSSFWorkbook ();
+
+                        FileOutputStream fileOut2 = new FileOutputStream(excelPath + sep
+                                + DateFormatter.dateToString(cb.getTime(), "yyyy-MM-dd") + name + "故障单.xlsx");
+
+
+                        XSSFSheet sheet2 = work2.createSheet("sheet1");
+
+                        sheet2.addMergedRegion(new CellRangeAddress(2,3,0,0));
+                        //sheet1.addMergedRegion(new CellRangeAddress(2,len+2,13,len+2));
+
+                        sheet2.addMergedRegion(new CellRangeAddress(2, 3, 1, 3));
+                        sheet2.addMergedRegion(new CellRangeAddress(4,4,1,2));
+                        sheet2.addMergedRegion(new CellRangeAddress(4,7,0,0));
+                        sheet2.addMergedRegion(new CellRangeAddress(5,7,1,2));
+
+                        XSSFCell cell2;
+
+                        //设置列宽度
+
+                        sheet2.setColumnWidth(0,30*256);
+                        sheet2.setColumnWidth(1,30*256);
+                        sheet2.setColumnWidth(2,30*256);
+                        sheet2.setColumnWidth(3,30*256);
+                        sheet2.setDefaultRowHeight((short)(50*20));
+
+
+                        // 表头格式
+                        CellStyle titleStyle2 = work2.createCellStyle();
+                        // 内容格式
+                        CellStyle dataStyle2 = work2.createCellStyle();
+
+
+                        titleStyle2.setAlignment(CellStyle.ALIGN_CENTER);
+                        titleStyle2.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+                        titleStyle2.setWrapText(true);
+                        titleStyle2.setBorderRight(CellStyle.BORDER_THIN);
+                        titleStyle2.setRightBorderColor(IndexedColors.BLACK.getIndex());
+                        titleStyle2.setBorderLeft(CellStyle.BORDER_THIN);
+                        titleStyle2.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+                        titleStyle2.setBorderTop(CellStyle.BORDER_THIN);
+                        titleStyle2.setTopBorderColor(IndexedColors.BLACK.getIndex());
+                        titleStyle2.setBorderBottom(CellStyle.BORDER_THIN);
+                        titleStyle2.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+
+                        dataStyle2.setAlignment(CellStyle.ALIGN_CENTER);
+                        dataStyle2.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+                        dataStyle2.setWrapText(true);
+                        dataStyle2.setAlignment(CellStyle.ALIGN_CENTER);
+                        dataStyle2.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+                        dataStyle2.setWrapText(true);
+                        dataStyle2.setBorderRight(CellStyle.BORDER_THIN);
+                        dataStyle2.setRightBorderColor(IndexedColors.BLACK.getIndex());
+                        dataStyle2.setBorderLeft(CellStyle.BORDER_THIN);
+                        dataStyle2.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+                        dataStyle2.setBorderTop(CellStyle.BORDER_THIN);
+                        dataStyle2.setTopBorderColor(IndexedColors.BLACK.getIndex());
+                        dataStyle2.setBorderBottom(CellStyle.BORDER_THIN);
+                        dataStyle2.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+
+                        // 表头字体
+                        Font titlefont2 = work2.createFont();
+                        // 内容字体
+                        Font datafont2 = work2.createFont();
+
+
+
+                        titlefont2.setFontHeightInPoints((short) 16);
+                        titlefont2.setFontName("方正仿宋简体");
+                        titlefont2.setBoldweight(Font.BOLDWEIGHT_BOLD);
+                        titlefont2.setColor(IndexedColors.RED.getIndex());
+
+
+                        datafont2.setFontHeightInPoints((short) 16);
+                        datafont2.setFontName("方正仿宋简体");
+                        datafont2.setBoldweight(Font.BOLDWEIGHT_BOLD);
+                        //datafont.setColor(HSSFColor.RED.index);
+
+                        //把字体加入到格式中
+
+                        titleStyle2.setFont(titlefont2);
+                        dataStyle2.setFont(datafont2);
+
+
+
+
+                        XSSFRow row2;
+
+                        for(int i = 0; i < 8; i++) {
+                            row2 = sheet2.createRow(i);
+                        }
+                        row2 = sheet2.getRow(0);
+                        //第一行
+                        //第一列
+                        cell2 = row2.createCell(0);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue("地区");
+                        //第二列
+                        cell2 = row2.createCell(1);
+                        cell2.setCellStyle(titleStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue(cg.getLocal());
+
+                        //第三列
+                        cell2 = row2.createCell(2);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue("记录时间");
+
+                        //第四列
+                        cell2 = row2.createCell(3);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue(DateFormatter.dateToString(cg.getRecordtime(), "yyyy-MM-dd"));
+
+                        //第二行
+                        row2 = sheet2.getRow(1);
+
+                        //第一列
+                        cell2 = row2.createCell(0);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue("检查人");
+                        //第二列
+                        cell2 = row2.createCell(1);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue(cg.getCheckuser());
+
+                        //第三列
+                        cell2 = row2.createCell(2);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue("联系电话");
+
+                        //第四列
+                        cell2 = row2.createCell(3);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue(cg.getLinkphone());
+
+                        //第三行
+                        row2 = sheet2.getRow(2);
+                        //第一列
+                        cell2 = row2.createCell(0);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue("故障记录");
+
+                        //第二列
+                        cell2 = row2.createCell(1);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue(cg.getGzjl());
+
+                        //第三列
+                        cell2 = row2.createCell(2);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+                        //第四列
+                        cell2 = row2.createCell(3);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+                        //第四行
+                        row2 = sheet2.getRow(3);
+                        //第一列
+                        cell2 = row2.createCell(0);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+
+                        //第二列
+                        cell2 = row2.createCell(1);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+                        //第三列
+                        cell2 = row2.createCell(2);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+                        //第四列
+                        cell2 = row2.createCell(3);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+
+                        //第五行
+                        row2 = sheet2.getRow(4);
+                        //第一列
+                        cell2 = row2.createCell(0);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue("故障处理");
+
+                        //第二列
+                        cell2 = row2.createCell(1);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue("故障判断");
+
+                        //第三列
+                        cell2 = row2.createCell(2);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+
+                        //第四列
+                        cell2 = row2.createCell(3);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue("故障处理");
+
+                        //第六行
+                        row2 = sheet2.getRow(5);
+                        //第一列
+                        cell2 = row2.createCell(0);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+
+                        //第二列
+                        cell2 = row2.createCell(1);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue(cg.getGzpd());
+
+                        //第三列
+                        cell2 = row2.createCell(2);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+
+                        //第四列
+                        cell2 = row2.createCell(3);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue(cg.getGzcl());
+
+                        //第七行
+                        row2 = sheet2.getRow(6);
+                        //第一列
+                        cell2 = row2.createCell(0);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+
+                        //第二列
+                        cell2 = row2.createCell(1);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+                        //第三列
+                        cell2 = row2.createCell(2);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+
+                        //第四列
+                        cell2 = row2.createCell(3);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue("备注");
+
+
+                        //第八行
+                        row2 = sheet2.getRow(7);
+                        //第一列
+                        cell2 = row2.createCell(0);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+
+                        //第二列
+                        cell2 = row2.createCell(1);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+                        //第三列
+                        cell2 = row2.createCell(2);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+
+
+                        //第四列
+                        cell2 = row2.createCell(3);
+                        cell2.setCellStyle(dataStyle2);
+                        cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell2.setCellValue(cg.getBz());
+
+
+
+                        work2.write(fileOut2);
+                        fileOut2.close();
+                    }
 
 
 

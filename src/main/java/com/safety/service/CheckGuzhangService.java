@@ -26,5 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
  @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
  CheckGuzhang saveCheckGuzhang(CheckGuzhang cb);
 
+ @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
+ CheckGuzhang findByCheckbiaogeid(Long checkbiaogeid);
+
 
 }
